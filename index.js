@@ -36,8 +36,12 @@ app.get("/contact", (req, res) =>{
   res.send('this is contact page');
 })
 
+
+// headersent is used to see the response
 app.get("/user", (req, res) =>{
+  console.log(res.headersSent);
   res.send('this is user page');
+  console.log(res.headersSent);
 })
 
 // this go back to user route because it always route to parent route 
@@ -66,3 +70,22 @@ app.get('/download', (req, res)=>{
 app.get('/resume', (req,res)=>{
   res.sendFile(__dirname+ '/files/Kartik_aswal_resume.pdf')
 })
+
+// res.end()
+// Ends the response process.
+// Without this, the client would keep waiting for more data (the request wouldn’t “finish”).
+// Optionally, you can also pass data into res.end(), like res.end("Done").
+app.get('/end',(req, res)=>{
+  res.write("This is testing ");
+  res.end('Done');
+})
+
+// this method is used to give the page statu
+app.get('/error', (req, res)=>{
+  res.sendStatus(404);
+})
+
+app.get('/checkstatus',(req, res)=>{
+  res.status(200).send('Hello');
+})
+
