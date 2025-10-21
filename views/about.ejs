@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <p><%= content%></p>
+    
+    <% if(message){
+        %>
+        <p><%= message %></p>
+        <%
+    }else{
+        %>
+        <span>Theres is no message</span>
+        <%
+    }
+    %>
+
+    <!-- print the array -->
+    <ul>
+    <% items.forEach(item => { %>
+        <li><%= item.name %> and <%= item.color %></li>
+    <% }) %>
+    </ul>
+
+    <table class="border-2">
+        <%
+        items.forEach(item=>{
+            %> 
+            <tr class="border-2">
+                <td class="border-2 p-2"><%= item.name %></td>
+                <td class="border-2 p-2"><%= item.color %></td>
+            </tr>
+            <%
+        })
+        %>
+    </table>
+
+
+</body>
+</html>
