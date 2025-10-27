@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title %></h1>
-    <p><%= content%></p>
+<%- include('header') %>
+
+    <h1 class="text-center font-semibold text-yellow-300 text-3xl p-3"><%= title %></h1>
+    <p class="text-center font-semibold text-xl"><%= content%></p>
     
     <% if(message){
         %>
-        <p><%= message %></p>
+        <p class="text-center"><%= message %></p>
         <%
     }else{
         %>
@@ -22,25 +15,33 @@
     %>
 
     <!-- print the array -->
-    <ul>
+    <ul class="text-center">
     <% items.forEach(item => { %>
-        <li><%= item.name %> and <%= item.color %></li>
+        <li class="font-semibold"><%= item.name %> and <%= item.color %></li>
     <% }) %>
     </ul>
 
-    <table class="border-2">
-        <%
-        items.forEach(item=>{
-            %> 
-            <tr class="border-2">
-                <td class="border-2 p-2"><%= item.name %></td>
-                <td class="border-2 p-2"><%= item.color %></td>
+   <div class="flex justify-center p-4">
+        <table class="table-auto border-collapse border-spacing-x-8 border-2">
+            <thead>
+            <tr class="border-b-2">
+                <th class="px-8 py-2">Name</th>
+                <th class="px-8 py-2">Color</th>
+                <th class="px-8 py-2">Location</th>
             </tr>
-            <%
-        })
-        %>
-    </table>
+            </thead>
+            <tbody>
+            <% items.forEach(item => { %>
+                <tr class="border-b-2">
+                <td class="px-8 py-2 text-center"><%= item.name %></td>
+                <td class="px-8 py-2 text-center"><%= item.color %></td>
+                <td class="px-8 py-2 text-center"><%= item.location %></td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+<%- include('footer') %>
 
 
-</body>
-</html>

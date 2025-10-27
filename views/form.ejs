@@ -1,42 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Form</title>
-</head>
+<div class="container">
+    
+    <div class="row">
+        <div class="form py-5 flex justify-center">
 
-<body>
-
-    <div class="container">
-        <div class="row bg-gray-400 p-4">Header</div>
-        <div class="row">
-            <div class="form py-5 flex justify-center">
-
-                <form action="/submit" method="POST" class="flex flex-col justify-center gap-2 border-2 p-4 rounded-md">
-                    <div class="flex justify-center gap-3">
-                        <label for="myname">Enter you name:</label><input type="text" name="myname"
-                            class="border-2 rounded-sm">
-                    </div>
-                    <div class="flex justify-center">
-                        <input type="submit" class="border-2 p-1 rounded-sm">
-                    </div>
-                </form>
-            </div>
+            <form action="/submit" method="POST" class="flex flex-col justify-center gap-2 border-2 p-4 rounded-md">
+                <div class="flex justify-center gap-3">
+                    <label for="myname">Enter you name:</label><input type="text" name="myname"
+                        class="border-2 rounded-sm">
+                </div>
+                <div class="flex justify-center">
+                    <input type="submit" class="border-2 p-1 rounded-sm">
+                </div>
+            </form>
         </div>
-
-        <div class="message flex justify-center">
-            <div class=" bg-green-400 p-1 rounded-md">
-                <p>
-                    <%= message %>
-                </p>
-            </div>
-        </div>
-        <div class="row">Footer</div>
     </div>
 
-</body>
+    <div class="message flex justify-center">
+        <div class=" bg-green-400 p-1 rounded-md">
+            <p>
+                <%= message %>
+            </p>
+        </div>
+    </div>
 
-</html>
+</div>
+
+<%- include('footer') %>
