@@ -18,5 +18,12 @@
     "url": "https://github.com/Aswal-11/Node-js-/issues"
   },
   "homepage": "https://github.com/Aswal-11/Node-js-#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }

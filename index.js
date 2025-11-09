@@ -1,7 +1,13 @@
 import express from 'express'
+import mongoose from 'mongoose';
 
 const app = express();
 
+// Database 
+mongoose.connect('mongodb://127.0.0.1:27017/contacts-crud')
+.then(()=>{console.log("Database connected")});
+
+//Middleware
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.use(express.static('public'));
