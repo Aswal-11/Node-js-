@@ -1,4 +1,5 @@
 import Contact from '../models/contacts.model.js';
+import Form from '../models/form.model.js';
 import mongoose from 'mongoose';
 
 // res.json(contacts);
@@ -70,7 +71,7 @@ export const updateContactPage = async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.id);
     if (!contact) {
-      return res.render('404', { message: 'Contact Not Found' });
+      return res.render('404', { message : 'Contact Not Found' });
     }
     // res.json(contact);
     res.render('update-contact', { contact });
@@ -112,4 +113,13 @@ export const deleteContact = async (req, res) => {
   } catch (error) {
     res.render('500', { message: error });
   }
+}
+
+export const openForm = async(req, res) =>{
+  res.render('form');
+}
+
+export const submitForm = async(req, res)=>{
+  await Form.create(req.body); 
+  res.redirect("/");
 }

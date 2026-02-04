@@ -1,5 +1,5 @@
 import express from 'express'
-import {  getContacts, getContact, addContact, addContactPage, updateContactPage, updateContact, deleteContact } from '../controller/contacts.controller.js';
+import {  getContacts, getContact, addContact, addContactPage, updateContactPage, updateContact, deleteContact, openForm, submitForm } from '../controller/contacts.controller.js';
 
 const router = express.Router();
 
@@ -10,5 +10,7 @@ router.post('/add-contact', addContact);
 router.get('/update-contact/:id', updateContactPage);
 router.post('/update-contact/:id', updateContact);
 router.get('/delete-contact/:id', deleteContact);
+router.get('/open-form', openForm);
+router.post('/submit-form', submitForm)
 
 export default router;
