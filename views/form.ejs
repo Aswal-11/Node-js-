@@ -1,59 +1,109 @@
 <%- include('partials/header.ejs') %>
 
-    <main class="py-5">
+    <main class="py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
         <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header card-title">
-                            <strong>Add New Contact</strong>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card shadow-lg border-0" style="border-radius: 15px; overflow: hidden;">
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem;">
+                            <h2 class="mb-0" style="font-weight: 700; font-size: 28px;">
+                                <i class="fas fa-user-plus"></i> Add New Contact
+                            </h2>
+                            <p class="mb-0 mt-2" style="font-size: 14px; opacity: 0.9;">Fill in the details below</p>
                         </div>
-                        <form action="/submit-form" method="post">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group row">
-                                            <label for="username" class="col-md-3 col-form-label">Username</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="username" id="username" class="form-control">
-                                            </div>
+                        <% if(error && error.length> 0) { %>
+                            <div class="alert alert-danger m-4 border-0"
+                                style="border-radius: 8px; background: #f8d7da; border-left: 5px solid #dc3545;">
+                                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                    <i class="fas fa-exclamation-circle"
+                                        style="font-size: 24px; color: #dc3545; margin-right: 0.75rem;"></i>
+                                    <strong style="color: #721c24; font-size: 18px;">Validation Errors</strong>
+                                </div>
+                                <ul style="margin: 0; padding-left: 2.5rem; list-style: none;">
+                                    <%error.forEach(err=>{%>
+                                        <li style="color: #721c24; margin-bottom: 0.5rem; font-size: 15px;">
+                                            <i class="fas fa-times-circle"
+                                                style="color: #dc3545; margin-right: 0.5rem;"></i>
+                                            <%= err.msg %>
+                                        </li>
+                                        <%})%>
+                                </ul>
+                            </div>
+                            <%}%>
+                                <form action="/submit-form" method="post">
+                                    <div class="card-body p-4">
+                                        <div class="form-group mb-4">
+                                            <label for="username" class="form-label fw-600"
+                                                style="color: #333; margin-bottom: 0.75rem;">
+                                                Username <span style="color: #dc3545;">*</span>
+                                            </label>
+                                            <input type="text" name="username" id="username" class="form-control"
+                                                style="border: 2px solid #e9ecef; border-radius: 8px; padding: 0.75rem 1rem; font-size: 16px;"
+                                                placeholder="Enter your username">
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="useremail" class="col-md-3 col-form-label">Email</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="useremail" id="useremail" class="form-control">
-                                            </div>
+                                        <div class="form-group mb-4">
+                                            <label for="useremail" class="form-label fw-600"
+                                                style="color: hsl(0, 0%, 20%); margin-bottom: 0.75rem;">
+                                                Email <span style="color: #dc3545;">*</span>
+                                            </label>
+                                            <input type="email" name="useremail" id="useremail" class="form-control"
+                                                style="border: 2px solid #e9ecef; border-radius: 8px; padding: 0.75rem 1rem; font-size: 16px;"
+                                                placeholder="Enter your email address">
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="userpassword" class="col-md-3 col-form-label">Password</label>
-                                            <div class="col-md-9">
-                                                <input type="password" name="userpassword" id="userpassword"
-                                                    class="form-control">
-                                            </div>
+                                        <div class="form-group mb-4">
+                                            <label for="userpassword" class="form-label fw-600"
+                                                style="color: #333; margin-bottom: 0.75rem;">
+                                                Password <span style="color: #dc3545;">*</span>
+                                            </label>
+                                            <input type="password" name="userpassword" id="userpassword"
+                                                class="form-control"
+                                                style="border: 2px solid #e9ecef; border-radius: 8px; padding: 0.75rem 1rem; font-size: 16px;"
+                                                placeholder="Enter a secure password">
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="userage" class="col-md-3 col-form-label">Age</label>
-                                            <div class="col-md-9">
-                                                <input type="text" name="userage" id="userage" class="form-control">
-                                            </div>
+                                        <div class="form-group mb-4">
+                                            <label for="userage" class="form-label fw-600"
+                                                style="color: #333; margin-bottom: 0.75rem;">
+                                                Age <span style="color: #dc3545;">*</span>
+                                            </label>
+                                            <input type="number" name="userage" id="userage" class="form-control"
+                                                style="border: 2px solid #e9ecef; border-radius: 8px; padding: 0.75rem 1rem; font-size: 16px;"
+                                                placeholder="Enter your age" min="1" max="120">
                                         </div>
-                                        <hr>
-                                        <div class="form-group row mb-0">
-                                            <div class="col-md-9 offset-md-3">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                <a href="/" class="btn btn-outline-secondary">Cancel</a>
-                                            </div>
+
+                                        <div class="form-group mb-5">
+                                            <label for="usercity" class="form-label fw-600"
+                                                style="color: #333; margin-bottom: 0.75rem;">
+                                                City <span style="color: #dc3545;">*</span>
+                                            </label>
+                                            <select id="usercity" name="usercity" class="form-select">
+                                                <option value="">Select a city</option>
+                                                <option value="delhi">Delhi</option>
+                                                <option value="mumbai">Mumbai</option>
+                                                <option value="bangalore">Bangalore</option>
+                                                <option value="chennai">Chennai</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="d-grid gap-3">
+                                            <button type="submit" class="btn btn-primary"
+                                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 12px 30px; font-weight: 600; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;">
+                                                <i class="fas fa-save"></i> Save Contact
+                                            </button>
+                                            <a href="/" class="btn btn-outline-secondary"
+                                                style="border: 2px solid #e9ecef; padding: 12px 30px; font-weight: 600; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;">
+                                                <i class="fas fa-times"></i> Cancel
+                                            </a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
+                                </form>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-<%- include('partials/footer.ejs') %>
+    <%- include('partials/footer.ejs') %>

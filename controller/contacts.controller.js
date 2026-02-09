@@ -1,3 +1,4 @@
+import { body, validationResult } from 'express-validator';// for the validation you have to use this 
 import Contact from '../models/contacts.model.js';
 import Form from '../models/form.model.js';
 import mongoose from 'mongoose';
@@ -71,7 +72,7 @@ export const updateContactPage = async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.id);
     if (!contact) {
-      return res.render('404', { message : 'Contact Not Found' });
+      return res.render('404', { message: 'Contact Not Found' });
     }
     // res.json(contact);
     res.render('update-contact', { contact });
@@ -115,11 +116,51 @@ export const deleteContact = async (req, res) => {
   }
 }
 
-export const openForm = async(req, res) =>{
-  res.render('form');
+export const openForm = async (req, res) => {
+  res.render('form', { error: [] });
 }
+export const validationRegistration = [
+  body('username')
+    .notEmpty().withMessage('Userame is required')
+    .isLength({ min: 3, max: 30 }).withMessage('Username must be between 3 and 30 characters')
+    .isString().withMessage('Username must be a string')
+    .trim()
+    .custom(value =>{
+      if(value === 'admin'){
+        throw new Error('Username cannot be admin');
+      }
+      return true;
+    })
+    .customSanitizer(value => value.toLowerCase()),
 
-export const submitForm = async(req, res)=>{
-  await Form.create(req.body); 
-  res.redirect("/");
-}
+  body('useremail')
+    .notEmpty().withMessage('Email is required')
+    .isEmail().withMessage('Enter the correct Email id')
+    .normalizeEmail(),
+
+  body('userpassword')
+    .notEmpty().withMessage('Password is required')
+    .isLength({ min: 6, max: 30 }).withMessage('Password must be at least 6 characters long'),
+
+  body('userage')
+    .notEmpty().withMessage('Age is required')
+    .isInt({ min: 1, max: 120 }).withMessage('Enter a valid age between 1 and 120'),
+
+  body('usercity')
+    .isIn(['delhi', 'mumbai', 'bangalore', 'chennai']).withMessage('City must be one of Delhi, Mumbai, Bangalore, Chennai')
+
+];
+export const submitForm = async (req, res) => {
+  const error = validationResult(req);
+
+  if (error.isEmpty()) {
+    return res.send(req.body);
+  }
+
+  res.render('form', { error: error.array() })
+};
+
+// export const submitForm = async(req, res)=>{
+//   await Form.create(req.body);
+//   res.redirect("/");
+// }
