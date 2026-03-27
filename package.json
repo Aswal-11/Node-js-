@@ -2,16 +2,33 @@
   "name": "node-js",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aswal-11/Node-js-.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aswal-11/Node-js-/issues"
+  },
+  "homepage": "https://github.com/Aswal-11/Node-js-#readme",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-validator": "^7.3.1",
+    "mongoose": "^8.22.0",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-paginate-v2": "^1.9.1"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }
